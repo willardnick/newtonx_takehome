@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: mart_funnel_conversion
+    description: >
+      Part 1.1: Full-funnel conversion report. One row per funnel stage with
+      experts_reached, conversion_from_previous, and conversion_from_signup.
+      Rejected experts excluded from Verified and Activated stages.
+    columns:
+      - name: stage
+        tests:
+          - not_null
+      - name: experts_reached
+        tests:
+          - not_null
+
+  - name: mart_cohort_conversion
+    description: >
+      Part 1.2: Weekly cohort conversion analysis with activation rates,
+      days-to-activate distribution (median, p75, p90), and WoW trends.
+      Only counts activations within 60 days of signup.
+    columns:
+      - name: signup_week
+        tests:
+          - unique
+          - not_null
+
+  - name: mart_period_comparison
+    description: >
+      Part 1.3: Q3 vs Q4 2024 period comparison with signup volume,
+      activation rate, avg days to activate, percent changes, and
+      statistical significance flag (two-proportion z-test).
+
+  - name: mart_channel_performance
+    description: >
+      Part 2.1: Channel performance summary with CPS, CPA, LTV:CAC,
+      and activation rates per signup_source. Organic/referral show
+      NULL for cost metrics (zero spend). Unknown channel included
+      for transparency but flagged as unreliable for decisions.
+    columns:
+      - name: signup_source
+        tests:
+          - unique
+          - not_null
+
+  - name: mart_campaign_deep_dive
+    description: >
+      Part 2.2: Campaign-level rankings for paid channels. Ranks
+      campaigns by volume, activation rate (min 100 signups), and
+      LTV:CAC efficiency. Flags top-3 campaigns in each dimension.

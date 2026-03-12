@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: int_expert_funnel_summary
+    description: >
+      One row per expert with earliest timestamps for each funnel stage,
+      reached flags, rejection status, and days-to-activate.
+      Backbone model for all funnel and attribution analyses.
+    columns:
+      - name: expert_id
+        tests:
+          - unique
+          - not_null
+
+  - name: int_expert_with_engagement
+    description: >
+      Enriched expert record joining profile attributes, funnel progression,
+      and lifetime engagement/payout data. One row per expert.
+    columns:
+      - name: expert_id
+        tests:
+          - unique
+          - not_null
+
+  - name: int_channel_spend_summary
+    description: >
+      Aggregated channel and campaign spend totals from daily_channel_spend.
+      Covers paid channels only (organic/referral/unknown have zero spend).

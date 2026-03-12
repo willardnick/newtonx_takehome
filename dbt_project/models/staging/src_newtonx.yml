@@ -1,0 +1,139 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw tables from the NewtonX production database, loaded as CSVs into BigQuery."
+    database: newtonx-prod
+    schema: raw_data
+    tables:
+      - name: experts
+        description: "Expert profile records. One row per expert who created an account."
+        columns:
+          - name: expert_id
+            description: "Unique identifier for each expert."
+            tests:
+              - unique
+              - not_null
+          - name: signup_date
+            description: "Timestamp of account creation."
+            tests:
+              - not_null
+          - name: signup_source
+            description: "Acquisition channel: paid_search, paid_social, organic, referral, linkedin_outreach, unknown."
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['paid_search', 'paid_social', 'organic', 'referral', 'linkedin_outreach', 'unknown']
+          - name: utm_campaign
+            description: "Campaign name (nullable for organic/unknown sources)."
+          - name: utm_medium
+            description: "Marketing medium (nullable)."
+          - name: utm_source
+            description: "Traffic source (nullable)."
+          - name: country
+            description: "Expert's country."
+            tests:
+              - not_null
+          - name: industry
+            description: "Expert's primary industry vertical."
+            tests:
+              - not_null
+
+      - name: funnel_events
+        description: "Event stream tracking expert progression through the signup-to-activation funnel."
+        columns:
+          - name: event_id
+            description: "Unique event identifier."
+            tests:
+              - unique
+              - not_null
+          - name: expert_id
+            description: "Foreign key to experts table."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('raw', 'experts')
+                  field: expert_id
+          - name: event_name
+            description: "Funnel event type."
+            tests:
+              - not_null
+              - accepted_values:
+                  values:
+                    - signup
+                    - profile_started
+                    - profile_completed
+                    - verification_submitted
+                    - verification_approved
+                    - verification_rejected
+                    - first_engagement_completed
+          - name: event_timestamp
+            description: "When the event occurred."
+            tests:
+              - not_null
+          - name: event_properties
+            description: "Additional JSON context (nullable for most events)."
+
+      - name: engagements
+        description: "Completed expert engagements (surveys and interviews). Each row is a paid interaction."
+        columns:
+          - name: engagement_id
+            description: "Unique engagement identifier."
+            tests:
+              - unique
+              - not_null
+          - name: expert_id
+            description: "Foreign key to experts table."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('raw', 'experts')
+                  field: expert_id
+          - name: engagement_type
+            description: "Type of engagement: survey or interview."
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['survey', 'interview']
+          - name: engagement_date
+            description: "Completion date of the engagement."
+            tests:
+              - not_null
+          - name: payout_amount
+            description: "Amount paid to the expert in USD."
+            tests:
+              - not_null
+          - name: client_industry
+            description: "Industry of the requesting client."
+            tests:
+              - not_null
+
+      - name: daily_channel_spend
+        description: "Daily marketing spend by channel and campaign. Only paid channels are tracked."
+        columns:
+          - name: date
+            description: "Spend date."
+            tests:
+              - not_null
+          - name: channel
+            description: "Marketing channel (maps to experts.signup_source)."
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['paid_search', 'paid_social', 'linkedin_outreach']
+          - name: campaign_name
+            description: "Campaign name (maps to experts.utm_campaign)."
+            tests:
+              - not_null
+          - name: spend_usd
+            description: "Daily spend in USD."
+            tests:
+              - not_null
+          - name: impressions
+            description: "Ad impressions."
+            tests:
+              - not_null
+          - name: clicks
+            description: "Ad clicks."
+            tests:
+              - not_null

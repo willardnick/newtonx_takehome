@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: stg_experts
+    description: "Cleaned experts with standardized fields, signup_week, and paid channel flag."
+    columns:
+      - name: expert_id
+        tests:
+          - unique
+          - not_null
+      - name: signup_source
+        tests:
+          - not_null
+
+  - name: stg_funnel_events
+    description: "Cleaned funnel events with canonical stage ordering and rejection flag."
+    columns:
+      - name: event_id
+        tests:
+          - unique
+          - not_null
+      - name: expert_id
+        tests:
+          - not_null
+      - name: stage_order
+        description: "Must be populated for all known event types."
+        tests:
+          - not_null
+
+  - name: stg_engagements
+    description: "Cleaned engagements with typed payout amounts."
+    columns:
+      - name: engagement_id
+        tests:
+          - unique
+          - not_null
+      - name: payout_amount
+        tests:
+          - not_null
+
+  - name: stg_daily_channel_spend
+    description: "Cleaned daily spend with standardized channel/campaign names."
+    columns:
+      - name: spend_usd
+        tests:
+          - not_null
