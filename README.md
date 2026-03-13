@@ -6,7 +6,7 @@ This repository contains a complete dbt-based analytics solution for NewtonX's e
 
 **Author:** Nick Willard  
 **Time Spent:** ~3 hours  
-**Stack:** dbt (BigQuery dialect), HTML/JS (Chart.js dashboard), docx-js (memo), Claude.ai
+**Stack:** dbt (BigQuery dialect), HTML/JS (Chart.js dashboard), docx-js (memo), Claude.ai  
 **Link to Claude.Ai (Opus) Conversation:** https://claude.ai/share/fefa4b48-e063-4ab5-98e6-b1dbee7bed7a
 
 ---
