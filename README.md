@@ -9,6 +9,8 @@ This repository contains a complete dbt-based analytics solution for NewtonX's e
 **Stack:** dbt (BigQuery dialect), HTML/JS (Chart.js dashboard), docx-js (memo), Claude.ai  
 **Link to Claude.Ai (Opus) Conversation:** https://claude.ai/share/fefa4b48-e063-4ab5-98e6-b1dbee7bed7a
 
+**Author Commentary:** I spent the vast majority of my time checking the work produced via Claude, questioning assumptions it made, and digging into specifics around sessions and time between steps. There were simple misteps by Claude, such as firstly claiming that the step with the largest volume drop was the most critical step. A cursory analysis showed that this was _not_ the case, and I guided it towards a more appropriate form of analysis.
+
 ---
 
 ## Repository Structure
