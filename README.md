@@ -55,8 +55,7 @@ Interesting take home- more comprehensive than any other I've had the opportunit
 ├── dashboard/
 │   └── growth_pod_dashboard.html      ← Part 3: Interactive dashboard
 ├── memo/
-│   ├── growth_pod_memo.docx           ← Part 4: Written memo
-│   └── generate_memo.js               ← Memo generation script
+│   ├── growth_pod_memo.pdf           ← Part 4: Written memo
 └── data/                              ← Raw CSVs (for reference)
     ├── experts.csv
     ├── engagements.csv
