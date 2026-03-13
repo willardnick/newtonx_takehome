@@ -8,6 +8,7 @@ This repository contains a complete dbt-based analytics solution for NewtonX's e
 **Time Spent:** ~3 hours  
 **Stack:** dbt (BigQuery dialect), HTML/JS (Chart.js dashboard), docx-js (memo), Claude.ai  
 **Link to Claude.Ai (Opus) Conversation:** https://claude.ai/share/fefa4b48-e063-4ab5-98e6-b1dbee7bed7a  
+**Analytical Journey:** https://docs.google.com/document/d/1dVD5-kNED_Jh-cPxTu4EsUUHxQRE2zIO/edit?usp=sharing&ouid=111592798280597854238&rtpof=true&sd=true  
 **Instructions:** https://drive.google.com/drive/u/0/folders/1oToTCKZvkDCjQRuin4ZWxw0h-A40_z3R
 
 **Author Commentary:** I spent the vast majority of my time checking the work produced via Claude, questioning assumptions it made, and digging into specifics around sessions and time between steps. There were simple misteps by Claude, such as firstly claiming that the step with the largest volume drop was the most critical step. A cursory analysis showed that this was _not_ the case, and I iterated the analyses and dashboard creation around the core concepts of time between steps. I then walked through a number of steps searching for silver bullets that might point to website or tooling outages or marketing channel issues, of which Claude found none.
