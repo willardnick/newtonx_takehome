@@ -26,3 +26,20 @@ models:
     description: >
       Aggregated channel and campaign spend totals from daily_channel_spend.
       Covers paid channels only (organic/referral/unknown have zero spend).
+
+  - name: int_expert_sessions
+    description: >
+      Sessionized funnel events. A new session starts after 30+ minutes of
+      inactivity. One row per event with session_number assigned.
+      Foundation for multi-session funnel analysis.
+    columns:
+      - name: event_id
+        tests:
+          - unique
+          - not_null
+
+  - name: int_funnel_step_sessions
+    description: >
+      Paired funnel step transitions with timing and session-break analysis.
+      One row per expert per step transition (e.g., signup → profile_started).
+      Shows whether the next step required a new session and how long it took.
