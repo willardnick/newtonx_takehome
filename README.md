@@ -35,7 +35,7 @@ Interesting take home- more comprehensive than any other I've had the opportunit
 │   │   │   ├── int_expert_funnel_summary.sql    ← Pivoted funnel (backbone)
 │   │   │   ├── int_expert_with_engagement.sql   ← Expert + funnel + payouts
 │   │   │   ├── int_channel_spend_summary.sql    ← Aggregated spend
-│   │   │   ├── int_expert_sessions.sql          ← Sessionized events (30-min threshold)
+│   │   │   ├── int_expert_sessions.sql          ← Sessionized events (24-hour threshold)
 │   │   │   └── int_funnel_step_sessions.sql     ← Step-pair timing + session breaks
 │   │   └── marts/                     ← Final analytical outputs
 │   │       ├── mart_newtonx.yml
@@ -114,7 +114,7 @@ open ../dashboard/growth_pod_dashboard.html
 - `int_expert_funnel_summary` — Pivots the event stream into one row per expert with reached-flags. This is the backbone model, reused by 5 of the 6 mart models.
 - `int_expert_with_engagement` — Joins expert attributes, funnel progression, and payout data. Reused by 4 mart models.
 - `int_channel_spend_summary` — Aggregates daily spend to channel and campaign level. Reused by 2 mart models.
-- `int_expert_sessions` — Sessionizes raw funnel events using a 30-minute inactivity threshold. Assigns a `session_number` to every event. Reused by `int_funnel_step_sessions` and `mart_funnel_step_analysis`.
+- `int_expert_sessions` — Sessionizes raw funnel events using a 24-hour inactivity threshold. Assigns a `session_number` to every event. Reused by `int_funnel_step_sessions` and `mart_funnel_step_analysis`.
 - `int_funnel_step_sessions` — Pairs consecutive funnel steps per expert, computing step duration and whether the transition required a new session. Powers the step-level analysis in `mart_funnel_step_analysis`.
 
 **Marts:** Six tables, one per analytical question. Materialized as tables for dashboard performance.
