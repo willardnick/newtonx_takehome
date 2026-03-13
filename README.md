@@ -1,4 +1,4 @@
-# NewtonX Analytics Engineer Take-Home
+# NewtonX Data Analyst/Engineer Take-Home
 
 ## Project Overview
 
